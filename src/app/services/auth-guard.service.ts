@@ -38,6 +38,11 @@ export class AuthGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    /*****************************************************************************
+      determina se un routing è possibile o meno,
+      controlla che l'utente sia loggato o che esista una sessione da recuperare,
+      se così non è, il metodo ritorna false, bloccando il routing
+    ******************************************************************************/
     if (this.userLogged) {// caso base
       return true;
 

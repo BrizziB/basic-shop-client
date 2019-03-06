@@ -8,23 +8,20 @@ import { LocalStorageService } from './local/local.storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class ProductsService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  cid: Number;
-  otherCid: Number;
-  public conversationActive = false;
-  public otherConversationActive = false;
+
 
     /*****************************************************************************
       gli errori nelle response non vengono gestiti - per semplicità
     ******************************************************************************/
 
 
-  login(body: String): Observable<HttpResponse<Object>> {
+  getProductsWithState(body: String): Observable<HttpResponse<Object>> {
     const url = 'http://localhost:8080/basic-shop/rest/login';
     const req = this.http.post<HttpResponse<Object>>(
       url, body, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});

@@ -1,0 +1,30 @@
+<div id="home-container">
+  <div id="title-div">
+    <h1>
+      Our product, for you to purchase
+    </h1>
+    <app-header></app-header>
+  </div>
+
+  <div id='product-list-div'>
+    <div id='table-div'>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let prod of products">
+            <td>prodotto {{prod}}</td>
+            <td>descrizione {{prod}}</td>
+            <td>prezzo {{prod}} </td>
+            <td> <a  (click)="addToOrder(prod)" id="prod-add-btn" class="act-btn button" value="add">ADD TO ORDER</a></td>
+          </tr>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

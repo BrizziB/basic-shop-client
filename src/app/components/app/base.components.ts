@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from '../services/local/local.storage.service';
-import { UsersService } from '../services/user.service';
-import { LocalComponentsService } from '../services/local/local.components.service';
+import { LocalStorageService } from '../../services/local/local.storage.service';
+import { UsersService } from '../../services/user.service';
+import { LocalComponentsService } from '../../services/local/local.components.service';
 import { Router } from '@angular/router';
-import { AuthGuardService } from '../services/auth-guard.service';
+import { AuthGuardService } from '../../services/auth-guard.service';
 
 Component({
   template: ''

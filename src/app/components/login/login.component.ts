@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../model/User';
+import { User } from '../../model/User';
 import { Router } from '@angular/router';
 import { PathLocationStrategy } from '@angular/common';
 
-import { LocalComponentsService } from '../services/local/local.components.service';
-import { AuthGuardService } from '../services/auth-guard.service';
-import { UsersService } from '../services/user.service';
+import { LocalComponentsService } from '../../services/local/local.components.service';
+import { AuthGuardService } from '../../services/auth-guard.service';
+import { UsersService } from '../../services/user.service';
 
 import { HttpResponse } from 'selenium-webdriver/http';
 import { isNullOrUndefined } from 'util';
 import { Local } from 'protractor/built/driverProviders';
-import { LocalStorageService } from '../services/local/local.storage.service';
-import { BaseComponent } from './base.components';
+import { LocalStorageService } from '../../services/local/local.storage.service';
+import { BaseComponent } from '../app/base.components';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +41,8 @@ export class LoginComponent extends BaseComponent implements OnInit  {
         this.localStorageService.registerSession(this.user.id);
         this.authService.setUserLogged(true);
         this.authService.setLoggedUser(this.user);
-        this.router.navigate(['note-list']);
+        //alert(resp.body);
+        this.router.navigate(['app-home']);
       }
     });
   }

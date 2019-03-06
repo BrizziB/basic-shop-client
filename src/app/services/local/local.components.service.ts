@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AppComponent } from '../../components/app.component';
-import { LoginComponent } from '../../components/login.component';
+import { AppComponent } from '../../components/app/app.component';
+import { LoginComponent } from '../../components/login/login.component';
 
 
 @Injectable({

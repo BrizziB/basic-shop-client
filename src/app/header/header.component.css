@@ -1,0 +1,16 @@
+a{
+  display: inline-block;
+  max-height: 20px;
+  padding-top: 14px;
+  }
+
+#header-btn-div{
+  display: inline-block;
+  margin-left: 10%;
+  vertical-align: top;
+}
+
+#logout-btn{
+  margin-left: 20px;
+}
+
