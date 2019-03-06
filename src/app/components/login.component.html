@@ -1,0 +1,26 @@
+<div id="login-container">
+  <div id="title-div">
+    <h1>
+      Login
+    </h1>
+  </div>
+  <div>
+    <section class="loginform cf">
+      <form name="login" action="index_submit" method="get" accept-charset="utf-8">
+        <ul>
+          <li><label>E-Mail</label>
+          <input type="all" name="mail" [(ngModel)]="user.email" placeholder="address@email.com" required></li>
+          <li><label>Password</label>
+          <input type="password" name="password"  [(ngModel)]="user.password"  placeholder="password" required></li>
+          <div *ngIf="loginFailed" class="invalid-feedback">
+            <p class="fail-msg">Unable to find username or incorrect password</p>
+          </div>
+<!--           <div> questo è un modo per inserire una pagina html già pronta, anche la logica funziona
+            <object type="text/html" data="http://localhost:8080/prova/home.jsf" ></object>
+          </div> -->
+          <li><input (click)="login()" id="login-btn" class="button" type="submit" value="LOGIN"></li>
+        </ul>
+      </form>
+    </section>
+  </div>
+</div>
