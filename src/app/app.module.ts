@@ -9,8 +9,9 @@ import { LoginComponent } from './components/login/login.component';
 import { UsersService } from './services/user.service';
 import { LocalStorageService } from './services/local/local.storage.service';
 import { LocalComponentsService } from './services/local/local.components.service';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from '../app/components/home/home.component';
+import { HeaderComponent } from '../app/components/header/header.component';
+import { OrderComponent } from '../app/components/order/order.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { HeaderComponent } from './header/header.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

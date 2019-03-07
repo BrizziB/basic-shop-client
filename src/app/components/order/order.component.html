@@ -1,0 +1,28 @@
+<div id="order-container">
+  <div id="title-div">
+    <h1>
+      The products you are buying
+    </h1>
+    <app-header></app-header>
+  </div>
+
+  <div id='order-div'>
+    <div id='table-div'>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let prod of products">
+            <td>{{prod.productName}}</td>
+            <td>{{prod.description}}</td>
+            <td>{{prod.price}} </td>
+            <td> <a  (click)="removeFromOrder(prod)" id="prod-rmv-btn" class="act-btn button" value="remove">REMOVE FROM ORDER</a></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
