@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppComponent } from '../../components/app/app.component';
 import { LoginComponent } from '../../components/login/login.component';
+import { Product } from '../../model/Product';
 
 
 @Injectable({
@@ -8,8 +9,7 @@ import { LoginComponent } from '../../components/login/login.component';
 })
 export class LocalComponentsService {
 
-  loginComponent: LoginComponent;
-  root: AppComponent;
+  purchasedProducts: Product[] = [];
 
 
   constructor() {}

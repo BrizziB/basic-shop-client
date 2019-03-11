@@ -12,6 +12,9 @@ import { LocalComponentsService } from './services/local/local.components.servic
 import { HomeComponent } from '../app/components/home/home.component';
 import { HeaderComponent } from '../app/components/header/header.component';
 import { OrderComponent } from '../app/components/order/order.component';
+import { ProductsService } from './services/product.service';
+import { OrderService } from './services/order.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { OrderComponent } from '../app/components/order/order.component';
   ],
   providers: [
     UsersService,
+    ProductsService,
+    OrderService,
+    AuthGuardService,
     LocalComponentsService,
     LocalStorageService
   ],

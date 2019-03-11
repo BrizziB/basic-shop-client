@@ -37,7 +37,6 @@ export class LoginComponent extends BaseComponent implements OnInit  {
         this.localStorageService.registerSession(this.user.id);
         this.authService.setUserLogged(true);
         this.authService.setLoggedUser(this.user);
-        // alert(resp.body);
         if (this.user.id !== null) {
           this.router.navigate(['app-home']);
         }
@@ -62,7 +61,6 @@ export class LoginComponent extends BaseComponent implements OnInit  {
     this.user = new User();
     this.user.email = '';
     this.user.password = '';
-    this.localComponentsService.loginComponent = this;
   }
 
 

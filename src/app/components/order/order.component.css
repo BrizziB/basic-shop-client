@@ -1,0 +1,57 @@
+h1{
+  display: inline-block;
+}
+
+.header-btn{
+  float: right;
+}
+
+app-header{
+  min-height: 40px;
+}
+
+#table-div{
+  margin-top: 30px;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+}
+
+th, td{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #e1e1e1;
+  text-align: left;
+  padding-top:10px;
+  padding-bottom: 10px;
+}
+
+th{
+  padding-bottom: 14px;
+  text-align: left;
+}
+
+td{
+  color:#606c76;
+}
+a{
+  display: inline-block;
+  max-height: 20px;
+  padding-top: 14px;
+  padding-right: 10px;
+  padding-left: 10px;
+
+}
+
+#foot-btn-div{
+  margin-top: 30px;
+
+}
+
+.big-btn{
+  width: 200px !important;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}

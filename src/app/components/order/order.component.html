@@ -15,13 +15,16 @@
           <th>Price</th>
           <th>Action</th>
         </tr>
-        <tr *ngFor="let prod of products">
+        <tr *ngFor="let prod of userOrder.items">
             <td>{{prod.productName}}</td>
             <td>{{prod.description}}</td>
             <td>{{prod.price}} </td>
-            <td> <a  (click)="removeFromOrder(prod)" id="prod-rmv-btn" class="act-btn button" value="remove">REMOVE FROM ORDER</a></td>
+            <td> <a  (click)="removeProductFromOrder(prod)" id="prod-rmv-btn" class="act-btn button" value="remove">REMOVE</a></td>
           </tr>
       </table>
+    </div>
+    <div id="foot-btn-div">
+      <a  (click)="completeOrder()" id="order-end-btn" class="act-btn button big-btn" value="add">COMPLETE ORDER</a>
     </div>
   </div>
 
