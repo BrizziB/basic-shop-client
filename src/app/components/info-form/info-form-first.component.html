@@ -1,0 +1,28 @@
+<div id="info-container">
+  <div id="title-div">
+    <h1>
+      Insert your Personal Information
+    </h1>
+    <app-header></app-header>
+  </div>
+
+  <div id='form-div'>
+    <section class="infoform cf">
+      <form name="info-first" action="index_submit" method="get" accept-charset="utf-8">
+        <ul>
+          <li><label>Your first name</label>
+          <input type="all" name="firstname" [(ngModel)]="user.firstname"></li>
+          <li><label>Your second name</label>
+          <input type="all" name="surname"  [(ngModel)]="user.secondname"></li>
+          <li><label>Insert your age</label>
+          <input type="all" name="age"  [(ngModel)]="user.age"></li>
+        </ul>
+      </form>
+    </section>
+  </div>
+  <div id="foot-btn-div">
+    <a routerLink="/app-home" id="insert-info-btn" class="act-btn button-reverse big-btn" value="add">BACK</a>
+    <a (click)="saveInfo()" id="review-info-btn" class="act-btn button big-btn" value="add">NEXT PAGE</a>
+  </div>
+
+</div>

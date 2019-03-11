@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../services/local/local.storage.service';
-import { UsersService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { LocalComponentsService } from '../../services/local/local.components.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../../services/auth-guard.service';
@@ -11,7 +11,7 @@ Component({
 export class BaseComponent {
 
   constructor(protected localStorageService: LocalStorageService,
-      protected usersService: UsersService,
+      protected usersService: UserService,
       protected localComponentsService: LocalComponentsService,
       protected router: Router,
       protected authService: AuthGuardService
@@ -19,9 +19,11 @@ export class BaseComponent {
       ) {  }
 
       logout() {
-        this.authService.setUserLogged(false);
         this.localStorageService.deleteSession();
         this.localStorageService.cleanAll();
-        this.router.navigate(['login']);
+        this.authService.setLoggedUser(null);
+        this.authService.setSessionID(null);
+        this.authService.setUserLogged(false);
+        this.router.navigate(['/login']);
       }
 }

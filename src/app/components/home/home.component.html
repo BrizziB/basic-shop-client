@@ -19,14 +19,14 @@
             <td>{{prod.productName}}</td>
             <td>{{prod.description}}</td>
             <td>{{prod.price}} </td>
-            <td> <a  (click)="addToOrder(prod)" id="prod-add-btn" class="act-btn button" value="add">ADD TO ORDER</a></td>
+            <td> <a (click)="addToOrder(prod)" id="prod-add-btn" class="act-btn button" value="add">ADD TO ORDER</a></td>
           </tr>
       </table>
     </div>
   </div>
   <div id="foot-btn-div">
-    <a  (click)=" null" id="prod-add-btn" class="act-btn button big-btn" value="add">SHARE YOUR INFORMATION</a>
-    <a  (click)=" null" id="prod-add-btn" class="act-btn button-reverse big-btn" value="add">REVIEW YOUR INFORMATION</a>
+    <a routerLink="/app-info-form-first" id="insert-info-btn" class="act-btn button big-btn" value="add">SHARE YOUR INFORMATION</a>
+    <a routerLink="/app-review-info" id="review-info-btn" class="act-btn button-reverse big-btn" value="add">REVIEW YOUR INFORMATION</a>
   </div>
 
 </div>

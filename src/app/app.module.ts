@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './components/app/app.component';
 import { LoginComponent } from './components/login/login.component';
-import { UsersService } from './services/user.service';
+import { UserService } from './services/user.service';
 import { LocalStorageService } from './services/local/local.storage.service';
 import { LocalComponentsService } from './services/local/local.components.service';
 import { HomeComponent } from '../app/components/home/home.component';
@@ -15,6 +15,8 @@ import { OrderComponent } from '../app/components/order/order.component';
 import { ProductsService } from './services/product.service';
 import { OrderService } from './services/order.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { InfoFormComponent } from './components/info-form/info-form.component';
+import { InfoFormFirstComponent } from './components/info-form/info-form-first.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AuthGuardService } from './services/auth-guard.service';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    OrderComponent
+    OrderComponent,
+    InfoFormComponent,
+    InfoFormFirstComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     HttpClientModule
   ],
   providers: [
-    UsersService,
+    UserService,
     ProductsService,
     OrderService,
     AuthGuardService,

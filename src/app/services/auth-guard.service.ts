@@ -69,6 +69,7 @@ export class AuthGuardService implements CanActivate {
           } else {
             this.userLogged = true;
             this.sessionID = resp.body;
+            console.log(this.router.url);
             this.router.navigate(['/app-home']);
             return true;
           }

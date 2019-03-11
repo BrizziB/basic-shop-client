@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { LocalComponentsService } from '../../services/local/local.components.service';
 import { AuthGuardService } from '../../services/auth-guard.service';
-import { UsersService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 
 import { LocalStorageService } from '../../services/local/local.storage.service';
 import { BaseComponent } from '../app/base.components';
@@ -49,7 +49,7 @@ export class LoginComponent extends BaseComponent implements OnInit  {
   }
 
   constructor(protected localStorageService: LocalStorageService,
-    protected usersService: UsersService,
+    protected usersService: UserService,
     protected localComponentsService: LocalComponentsService,
     protected router: Router,
     protected authService: AuthGuardService
