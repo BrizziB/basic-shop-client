@@ -11,13 +11,12 @@ import { InfoFormComponent } from './info-form.component';
   templateUrl: './info-form-first.component.html',
   styleUrls: ['./info-form.component.css']
 })
-export class InfoFormFirstComponent extends InfoFormComponent implements OnInit{
+export class InfoFormFirstComponent extends InfoFormComponent implements OnInit {
 
   constructor(
-    private authService: AuthGuardService,
-    private userService: UserService,
-    private router: Router ) {
-    super(authService, userService, router);
+    protected userService: UserService,
+    protected router: Router ) {
+    super(userService, router);
   }
 
   ngOnInit() {

@@ -13,9 +13,8 @@ import { isNullOrUndefined } from 'util';
 export class InfoFormComponent implements OnInit {
 
   constructor(
-    private authService: AuthGuardService,
-    private userService: UserService,
-    private router: Router ) {
+    protected userService: UserService,
+    protected router: Router ) {
 
   }
 
