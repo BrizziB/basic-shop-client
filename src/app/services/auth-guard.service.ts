@@ -3,8 +3,9 @@ import {CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot} from '
 import { HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { User } from '../model/User';
 import { LocalStorageService } from './local/local.storage.service';
-import { isNullOrUndefined } from 'util';
-import { Observable } from 'rxjs';
+import { isNullOrUndefined, isNull } from 'util';
+import { of, Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -44,14 +45,16 @@ export class AuthGuardService implements CanActivate {
   ) {}
 
 
-  authCheck(): Observable<HttpResponse<String>>{
+  private authCheck(): Observable<HttpResponse<String>> {
     const url = 'http://localhost:8080/basic-shop/rest/user/check-auth';
     const req = this.http.get<String>(
       url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean {
     /*****************************************************************************
       determina se un routing è possibile o meno,
       controlla che l'utente sia loggato o che esista una sessione da recuperare,
@@ -60,25 +63,29 @@ export class AuthGuardService implements CanActivate {
     if (this.userLogged) {// caso base
       return true;
 
-    } if (!isNullOrUndefined(this.localStorageService.loadSession())) { // caso in cui si è ripristinata la sessione
-       this.authCheck().subscribe( // si verifica che la sessione sia ancora presente sul server
-        (resp: HttpResponse<String> ) => {
-          if (isNullOrUndefined(resp.body)) { // caso in cui è scaduta la sessione sul server
-            this.router.navigate(['/login']);
-            return false;
-          } else {
-            this.userLogged = true;
-            this.sessionID = resp.body;
-            console.log(this.router.url);
-            this.router.navigate(['/app-home']);
-            return true;
-          }
-        });
+    }  if (!isNullOrUndefined(this.localStorageService.loadSession()))  { // caso in cui si è ripristinata la sessione
+        /* qui si ritorna un Observable<boolean>
+        in questo modo è possibile risolvere il canActivate in maniera asincrona
+        con pipe si mettono in fila azioni asincrone; in questo caso il map,  mappa una risposta di tipo HttpResponse<String>
+        in un booleano, che risolve il canActivate.
+        */
+        return this.authCheck().pipe(
+          map( (response: HttpResponse<String>) => {
+            if (!isNullOrUndefined(response)) {
+              this.userLogged = true;
+              this.sessionID = response.body;
+              return true;
+            } else {
+                this.router.navigate(['/login']);
+                return false;
+            }
+          }),
+          catchError(() => of(false))
+        );
     } else {
         this.router.navigate(['/login']);
         return false;
     }
-    this.router.navigate(['/login']);
   }
 
 }

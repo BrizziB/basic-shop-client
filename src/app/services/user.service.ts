@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { isUndefined, isNullOrUndefined } from 'util';
 import { LocalStorageService } from './local/local.storage.service';
+import { User } from '../model/User';
 
 
 @Injectable({
@@ -31,6 +32,13 @@ export class UserService {
     const url = 'http://localhost:8080/basic-shop/rest/login';
     const req = this.http.post<HttpResponse<Object>>(
       url, body, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
+    return req;
+  }
+
+  getUserInfo(): Observable<HttpResponse<User>> {  // così funziona uguale la sessione ?
+    const url = 'http://localhost:8080/basic-shop/rest/user/data';
+    const req = this.http.get<User>(
+      url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
   }
 

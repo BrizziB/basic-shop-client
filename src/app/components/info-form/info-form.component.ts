@@ -3,6 +3,7 @@ import { AuthGuardService } from '../../services/auth-guard.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../model/User';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-info-form',
@@ -18,7 +19,7 @@ export class InfoFormComponent implements OnInit {
 
   }
 
-  user: User;
+  protected user: User = new User;
 
   saveInfo(): void {
     console.log('salvataggio conversazione');
@@ -26,7 +27,12 @@ export class InfoFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.userService.getUserInformation();
+    this.userService.getUserInfo().subscribe(
+      (resp) => {
+        if (!isNullOrUndefined(resp)) {
+          this.user = resp.body;
+        }
+      });
   }
 
 }
