@@ -15,8 +15,16 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  cid: Number;
+  private cid: Number;
   public conversationActive = false;
+
+  public setCid(newCid: Number) {
+    this.cid = newCid;
+  }
+
+  public getCid(): Number {
+    return this.cid;
+  }
 
   constructor(
     private http: HttpClient,
@@ -43,11 +51,11 @@ export class UserService {
   }
 
   startInformationConversation(): Observable<HttpResponse<Object>> {
-    const url = 'http://localhost:8080/prova/rest/info-conversation/start';
-    const req = this.http.get<HttpResponse<Object>>(
-      url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
-    this.conversationActive = true;
-    return req;
+      const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/start';
+      const req = this.http.get<HttpResponse<Object>>(
+        url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
+      this.conversationActive = true;
+      return req;
   }
 
   updateConversation(body): Observable<HttpResponse<Object>> {
@@ -55,7 +63,7 @@ export class UserService {
       console.log('cid is null');
       return null;
     }
-    const url = 'http://localhost:8080/prova/rest/info-conversation/update/?cid=' + this.cid;
+    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/update/?cid=' + this.cid;
     const req = this.http.post<HttpResponse<Object>>(
       url, body, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
@@ -66,7 +74,7 @@ export class UserService {
       console.log('cid is null');
       return null;
     }
-    const url = 'http://localhost:8080/prova/rest/info-conversation/status?cid=' + this.cid;
+    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/status?cid=' + this.cid;
     const req = this.http.get<HttpResponse<Object>>(
       url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
@@ -76,7 +84,7 @@ export class UserService {
     if (isNullOrUndefined(this.cid)) {
       return null;
     }
-    const url = 'http://localhost:8080/prova/rest/info-conversation/end/?cid=' + this.cid;
+    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/end/?cid=' + this.cid;
     const req = this.http.delete<HttpResponse<Object>>(
       url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     this.cid = null;

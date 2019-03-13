@@ -7,11 +7,11 @@ import { isNullOrUndefined } from 'util';
 import { InfoFormComponent } from './info-form.component';
 
 @Component({
-  selector: 'app-info-form-first',
-  templateUrl: './info-form-first.component.html',
+  selector: 'app-info-form-third',
+  templateUrl: './info-form-third.component.html',
   styleUrls: ['./info-form.component.css']
 })
-export class InfoFormFirstComponent extends InfoFormComponent implements OnInit {
+export class InfoFormThirdComponent extends InfoFormComponent implements OnInit {
 
   constructor(
     protected userService: UserService,

@@ -17,6 +17,8 @@ import { OrderService } from './services/order.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { InfoFormComponent } from './components/info-form/info-form.component';
 import { InfoFormFirstComponent } from './components/info-form/info-form-first.component';
+import { InfoFormSecondComponent } from './components/info-form/info-form-second.component';
+import { InfoFormThirdComponent } from './components/info-form/info-form-third.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { InfoFormFirstComponent } from './components/info-form/info-form-first.c
     HeaderComponent,
     OrderComponent,
     InfoFormComponent,
-    InfoFormFirstComponent
+    InfoFormFirstComponent,
+    InfoFormSecondComponent,
+    InfoFormThirdComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-info-form',
-  templateUrl: './info-form.component.html',
+  template: '',
   styleUrls: ['./info-form.component.css']
 })
 export class InfoFormComponent implements OnInit {
@@ -22,16 +22,57 @@ export class InfoFormComponent implements OnInit {
 
   saveInfo(): void {
     console.log('salvataggio conversazione');
-    this.userService.updateConversation('');
+    const body = JSON.stringify({
+      firstname: this.user.firstname,
+      secondname: this.user.secondname,
+      age: this.user.age,
+
+      country: this.user.country,
+      city: this.user.city,
+      address: this.user.address,
+
+      mainHobby: this.user.mainHobby,
+      job: this.user.job,
+      favTvShow: this.user.favTvShow
+
+    });
+    this.userService.updateConversation(body).subscribe(
+      (resp) => {
+        if (!isNullOrUndefined(resp)) {
+          console.log('utente aggiornato');
+        }
+      }
+    );
+  }
+
+  closeInfoAndSave() {
+    this.saveInfo();
+    this.userService.endConversation().subscribe(
+      (resp) => {
+        if (! isNullOrUndefined(resp.body)) {
+          this.router.navigate(['/app-home']);
+          console.log('conversazione chiusa');
+        }
+      }
+    );
   }
 
   ngOnInit() {
-    this.userService.getUserInfo().subscribe(
-      (resp) => {
-        if (!isNullOrUndefined(resp)) {
-          this.user = resp.body;
+    if (isNullOrUndefined(this.userService.getCid())) { // inizia la conversazione, nel caso non fosse già in corso (refresh)
+      this.userService.startInformationConversation().subscribe(
+        (resp) => {
+          if (! isNullOrUndefined(resp.body)) {
+            this.userService.setCid((Number)(resp.body));
+            console.log('new cid: ' + resp.body);
+          }
+        });
+    }
+    this.userService.getUserInfo().subscribe( // richiede i dati completi dell'utente
+    (resp) => {
+      if (! isNullOrUndefined(resp.body)) {
+        this.user = resp.body;
         }
-      });
+      }
+    );
   }
-
 }
