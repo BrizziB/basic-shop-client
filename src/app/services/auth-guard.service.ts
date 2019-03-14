@@ -71,7 +71,7 @@ export class AuthGuardService implements CanActivate {
         */
         return this.authCheck().pipe(
           map( (response: HttpResponse<String>) => {
-            if (!isNullOrUndefined(response)) {
+            if (!isNullOrUndefined(response.body)) {
               this.userLogged = true;
               this.sessionID = response.body;
               return true;

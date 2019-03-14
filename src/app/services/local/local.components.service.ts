@@ -9,8 +9,6 @@ import { Product } from '../../model/Product';
 })
 export class LocalComponentsService {
 
-  purchasedProducts: Product[] = [];
-
 
   constructor() {}
 }

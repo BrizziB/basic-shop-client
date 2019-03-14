@@ -23,6 +23,18 @@ export class LocalStorageService {
     localStorage.removeItem('userID');
   }
 
+  registerConversation(cid): void {
+    localStorage.setItem('cid', cid);
+  }
+
+  loadConversation(): string {
+    return localStorage.getItem('cid');
+  }
+
+  deleteConversation(): void {
+    localStorage.removeItem('cid');
+  }
+
 
 
   constructor() {}

@@ -16,7 +16,10 @@ export class UserService {
   };
 
   private cid: Number;
-  public conversationActive = false;
+  private conversationActive = false;
+  public user: User = new User;
+
+
 
   public setCid(newCid: Number) {
     this.cid = newCid;
@@ -37,14 +40,24 @@ export class UserService {
 
 
   login(body: String): Observable<HttpResponse<Object>> {
-    const url = 'http://localhost:8080/basic-shop/rest/login';
+    const url = 'http://localhost:8080/basic-shop/rest/log/in';
     const req = this.http.post<HttpResponse<Object>>(
       url, body, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
   }
 
+  logout(): Observable<HttpResponse<Object>> {
+    this.cid = null;
+    this.user = new User;
+
+    const url = 'http://localhost:8080/basic-shop/rest/log/out';
+    const req = this.http.delete<HttpResponse<Object>>(
+      url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
+    return req;
+  }
+
   getUserInfo(): Observable<HttpResponse<User>> {  // così funziona uguale la sessione ?
-    const url = 'http://localhost:8080/basic-shop/rest/user/data';
+    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/data';
     const req = this.http.get<User>(
       url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
@@ -74,7 +87,7 @@ export class UserService {
       console.log('cid is null');
       return null;
     }
-    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/status?cid=' + this.cid;
+    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/status/?cid=' + this.cid;
     const req = this.http.get<HttpResponse<Object>>(
       url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
@@ -89,6 +102,13 @@ export class UserService {
       url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     this.cid = null;
     this.conversationActive = false;
+    return req;
+  }
+
+  convCheck(): Observable<HttpResponse<boolean>> {
+    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/check/?cid=' + this.cid;
+    const req = this.http.get<boolean>(
+      url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
     return req;
   }
 

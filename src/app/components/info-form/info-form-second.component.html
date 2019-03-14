@@ -11,18 +11,18 @@
       <form name="info-first" action="index_submit" method="get" accept-charset="utf-8">
         <ul>
           <li><label>What's your country?</label>
-          <input type="all" name="country" [(ngModel)]="user.country"></li>
+          <input type="all" name="country" [(ngModel)]="userService.user.country"></li>
           <li><label>The city where you live in</label>
-          <input type="all" name="city"  [(ngModel)]="user.city"></li>
+          <input type="all" name="city"  [(ngModel)]="userService.user.city"></li>
           <li><label>Your Address</label>
-          <input type="all" name="address"  [(ngModel)]="user.address"></li>
+          <input type="all" name="address"  [(ngModel)]="userService.user.address"></li>
         </ul>
       </form>
     </section>
   </div>
   <div id="foot-btn-div">
-    <a routerLink="/app-info-form-first" (click)="saveInfo()"  class="act-btn button-reverse big-btn" value="back">BACK</a>
-    <a routerLink="/app-info-form-third" (click)="saveInfo()"  class="act-btn button big-btn" value="add">NEXT PAGE</a>
+    <a (click)="saveInfo()" routerLink="/app-info-form-first" class="act-btn button-reverse big-btn" value="back">BACK</a>
+    <a (click)="saveInfo()" routerLink="/app-info-form-third" class="act-btn button big-btn" value="add">NEXT PAGE</a>
   </div>
 
 </div>

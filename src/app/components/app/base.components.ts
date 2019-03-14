@@ -19,11 +19,15 @@ export class BaseComponent {
       ) {  }
 
       logout() {
-        this.localStorageService.deleteSession();
-        this.localStorageService.cleanAll();
-        this.authService.setLoggedUser(null);
-        this.authService.setSessionID(null);
-        this.authService.setUserLogged(false);
-        this.router.navigate(['/login']);
+        this.usersService.logout().subscribe(() => {
+          this.localStorageService.deleteSession();
+          this.localStorageService.deleteConversation();
+          this.localStorageService.cleanAll();
+          this.authService.setLoggedUser(null);
+          this.authService.setSessionID(null);
+          this.authService.setUserLogged(false);
+          this.router.navigate(['/login']);
+        });
+
       }
 }
