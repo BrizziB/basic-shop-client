@@ -67,7 +67,7 @@ export class InfoFormComponent implements OnInit {
 
 
   protected initUser() {
-    /* inizializzo l'utente locale con quello remoto ospitato sul server
+    /* inizializzo l'utente locale con quello remoto persistito sul server
 
     */
     if (! isNullOrUndefined(this.userService.user.id)) {

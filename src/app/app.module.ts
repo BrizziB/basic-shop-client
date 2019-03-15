@@ -19,6 +19,7 @@ import { InfoFormComponent } from './components/info-form/info-form.component';
 import { InfoFormFirstComponent } from './components/info-form/info-form-first.component';
 import { InfoFormSecondComponent } from './components/info-form/info-form-second.component';
 import { InfoFormThirdComponent } from './components/info-form/info-form-third.component';
+import { InfoReviewComponent } from './components/info-form/info-review.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { InfoFormThirdComponent } from './components/info-form/info-form-third.c
     InfoFormComponent,
     InfoFormFirstComponent,
     InfoFormSecondComponent,
-    InfoFormThirdComponent
+    InfoFormThirdComponent,
+    InfoReviewComponent
   ],
   imports: [
     BrowserModule,

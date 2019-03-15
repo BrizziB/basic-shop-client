@@ -1,0 +1,31 @@
+<div id="info-container">
+  <div id="title-div">
+    <h1>
+      A review of your information
+    </h1>
+    <app-header></app-header>
+  </div>
+
+  <div id='form-div'>
+      <section class="infoform cf">
+          <form name="info-first" action="index_submit" method="get" accept-charset="utf-8">
+            <ul>
+                <li><label>Your first Name:</label> {{user.firstname}} </li>
+                  <li><label>Your second Name:</label> {{user.secondname}} </li>
+                  <li><label>Your Age:</label>{{user.age}} </li>
+                  <li><label>Your home country:</label>{{user.country}} </li>
+                  <li><label>Your city:</label>{{user.city}} </li>
+                  <li><label>Your address:</label>{{user.address}} </li>
+                  <li><label>Your Job:</label>{{user.job}} </li>
+                  <li><label>Your Hobby:</label>{{user.mainHobby}} </li>
+                  <li><label>Your favorite TV Show:</label>{{user.favTvShow}} </li>
+            </ul>
+          </form>
+      </section>
+  </div>
+
+
+  <div id="foot-btn-div">
+    <a routerLink="/app-home" class="act-btn button-reverse big-btn" value="back">BACK TO HOME</a>
+  </div>
+

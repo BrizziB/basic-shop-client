@@ -36,6 +36,12 @@ export class UserService {
 
     /*****************************************************************************
       gli errori nelle response non vengono gestiti - per semplicità
+
+      XMLHttpRequest.withCredentials Is a Boolean that indicates whether or not
+      cross-site Access-Control requests should be made using credentials such
+      as cookies or authorization headers. The default is false.
+
+      [observe: 'response']  serve per leggere tutta la risposta http
     ******************************************************************************/
 
 
@@ -56,10 +62,17 @@ export class UserService {
     return req;
   }
 
-  getUserInfo(): Observable<HttpResponse<User>> {  // così funziona uguale la sessione ?
-    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/data';
+  getUser(): Observable<HttpResponse<User>> {  // così funziona uguale la sessione ?
+    const url = 'http://localhost:8080/basic-shop/rest/user/get';
     const req = this.http.get<User>(
-      url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
+      url, {withCredentials: true, observe: 'response', headers: this.httpOptions.headers});
+    return req;
+  }
+
+  getUserInfo(): Observable<HttpResponse<User>> {  // così funziona uguale la sessione ?
+    const url = 'http://localhost:8080/basic-shop/rest/user/info-conversation/data/?cid=' + this.cid;
+    const req = this.http.get<User>(
+      url, {withCredentials: true, observe: 'response', headers: this.httpOptions.headers});
     return req;
   }
 
