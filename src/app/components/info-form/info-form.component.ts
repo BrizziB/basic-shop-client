@@ -13,6 +13,18 @@ import { LocalStorageService } from '../../services/local/local.storage.service'
 })
 export class InfoFormComponent implements OnInit {
 
+  /**************************************************************************************************************
+  | Questo componente rappresenta il generico componente di inserimento informazioni (non ha un template html)  *
+  | implementa funzionalità per salvare e caricare le info sia da localStorage che da server remoto             *
+  | essendo questa una versione ibrida del client, si sfrutta lo stato del server anche tramite                 *
+  | beans di conversation ciò di includere il cid nelle richieste http legate a tale bean                       *
+  | per fare questo, il componente verifica, appena inizializzato, se è presende un cid sullo UserService,      *
+  | in caso negativo controlla sul localStorageService per un cid salvato da precedenti refresh.                *
+  | In caso non siano presenti cid, viene avviata una nuova conversazione col server ed aggiornato il cid       *
+  | le funzionalità implementate qui sono usate dai 3 componenti di inserimento informazioni utente             *
+  |                                                                                                             *
+  ***************************************************************************************************************/
+
   constructor(
     protected userService: UserService,
     protected localStorageService: LocalStorageService,
@@ -51,7 +63,8 @@ export class InfoFormComponent implements OnInit {
       sulla conversazione remota come in saveInfo();
       dopo però richiamo endConversation(), che termina la conversazione
       ponendo a null il cid e terminando il ciclo di vita del relativo bean
-      Inoltre lo user conservato sul bean viene persistito sul DB
+      endConversation() inoltre richiede che lo user presente sul conversation bean
+      venga persistito finalmente sul DB
     */
     this.saveInfo();
     this.userService.endConversation().subscribe(
@@ -68,7 +81,6 @@ export class InfoFormComponent implements OnInit {
 
   protected initUser() {
     /* inizializzo l'utente locale con quello remoto persistito sul server
-
     */
     if (! isNullOrUndefined(this.userService.user.id)) {
       return true;

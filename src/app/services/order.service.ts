@@ -16,6 +16,9 @@ export class OrderService {
   };
     /*****************************************************************************
       gli errori nelle response non vengono gestiti - per semplicità
+
+      userID non è mai utilizzato, viene sempre sfruttata la versione remota,
+      contenuta nel session Bean
     ******************************************************************************/
   constructor(
     private http: HttpClient,
@@ -24,13 +27,6 @@ export class OrderService {
 
     getOrderStateful(): Observable<HttpResponse<Order>> {
       const url = 'http://localhost:8080/basic-shop/rest/order/get';
-      const req = this.http.get<Order>(
-        url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
-      return req;
-    }
-
-    getOrderStateless(userID: Number): Observable<HttpResponse<Order>> {
-      const url = 'http://localhost:8080/basic-shop/rest/order/get/' + userID;
       const req = this.http.get<Order>(
         url, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
       return req;
@@ -66,13 +62,6 @@ export class OrderService {
 
     completeOrderStateful(): Observable<HttpResponse<Boolean>> {
       const url = 'http://localhost:8080/basic-shop/rest/order/complete';
-      const req = this.http.put<Boolean>(
-        url, null, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
-      return req;
-    }
-
-    completeOrderStateless(userID: Number): Observable<HttpResponse<Boolean>> {
-      const url = 'http://localhost:8080/basic-shop/rest/order/complete/' + userID;
       const req = this.http.put<Boolean>(
         url, null, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});
       return req;

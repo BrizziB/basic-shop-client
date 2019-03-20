@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../../model/Order';
 import { Product } from '../../model/Product';
 import { HttpResponse } from '@angular/common/http';
-import { LocalComponentsService } from '../../services/local/local.components.service';
 import { OrderService } from '../../services/order.service';
-import { User } from '../../model/User';
-import { AuthGuardService } from '../../services/auth-guard.service';
 import { isNullOrUndefined } from 'util';
 import { AppRoutingModule } from '../../app-routing.module';
 import { Router } from '@angular/router';
@@ -17,15 +14,24 @@ import { Router } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
 
+    /************************************************************************************
+  Questo componente mostra la lista dei prodotti selezioni dall'utente ,              *
+  permette di completare l'ordine o di rimuovere prodotti da esso                     *
+                                                                                      *
+  Il servizio OrderService permette operazioni CRUD sull'ordinazione dell'            *
+  utente loggato, lo fa sfruttando la Sessione mantenuta sul server: le richieste http*
+  non specificano alcun userID, tuttavia il mittente viene riconosciuto dal server    *
+  e mappato alla servlet dedicata, in cui è in vita il session bean contenente lo     *
+  lo userID dell'utente loggato. Questo userID viene usato per l'interazione col DB e *
+  certifica l'auth                                                                    *
+  *************************************************************************************/
+
   constructor(
-    protected localComponentsService: LocalComponentsService,
     protected orderService: OrderService,
-    protected authService: AuthGuardService,
     protected router: Router
   ) { }
 
   userOrder: Order = new Order();
-  user: User;
 
   addProductToOrder(prod: Product): void {
     this.userOrder.items.push(prod);
@@ -47,7 +53,6 @@ export class OrderComponent implements OnInit {
         }
       }
     );
-
     if (true) {
       let itemDeleted = false; // per eliminare un solo oggetto per ogni tipo - bruttino ma passabile penso
       for (let i = 0; i < this.userOrder.items.length; i++) {
@@ -69,7 +74,6 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.authService.getLoggedUser();
     this.orderService.getOrderStateful().subscribe(
       ((resp: HttpResponse<Order>) => {
         if (resp !== null) {

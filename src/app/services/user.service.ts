@@ -42,10 +42,20 @@ export class UserService {
       as cookies or authorization headers. The default is false.
 
       [observe: 'response']  serve per leggere tutta la risposta http
+
+      i metodi che richiedono l'uso del conversation bean remoto specificano ed
+      usano il campo cid. tale campo può essere ripristinato da localStorage
+      Il ripristino del cid (quando serve averlo) viene garantito dalla procedura
+      di init dei componenti info-form: questa verifica che un cid sia
+      presente e valido e ne richiede uno nuovo in caso di assenza.
+      Quindi metodi relativi alla conversazione vengono richiamati solo dai
+      componenti info-form, in ogni caso quindi un cid sarà presente o richiesto
     ******************************************************************************/
 
 
   login(body: String): Observable<HttpResponse<Object>> {
+    // questo metodo è uguale anche nella versione REST
+    // ritorna una risposta HTTP contenente i dati dell'utente loggato
     const url = 'http://localhost:8080/basic-shop/rest/log/in';
     const req = this.http.post<HttpResponse<Object>>(
       url, body, {withCredentials: true, headers: this.httpOptions.headers, observe: 'response'});

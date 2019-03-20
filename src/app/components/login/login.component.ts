@@ -3,19 +3,31 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/User';
 import { Router } from '@angular/router';
 
-import { LocalComponentsService } from '../../services/local/local.components.service';
 import { AuthGuardService } from '../../services/auth-guard.service';
 import { UserService } from '../../services/user.service';
 
 import { LocalStorageService } from '../../services/local/local.storage.service';
-import { BaseComponent } from '../app/base.components';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent extends BaseComponent implements OnInit  {
+export class LoginComponent implements OnInit  {
+
+  /****************************************************************************************
+  Questo componente permette il login dell'utente                                       *
+  Per farlo utilizza il servizio UserService per inviare al server                      *
+  le credenziali inserite, notifica inoltre all AuthService l'avvenuto login            *
+  ed il relativo userID, questo abilita il routing verso altre pagine dell'applicazione *
+  utilizza anche il LocalStorageService per persistere in locale lo userID, questo      *
+  permetterà il ripristino della sessione in caso di refresh del client                 *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  avrei preferito mettere dipendenza da un solo servizio, era possibile mettendo la     *
+  funzione login in AuthService e assegnango a quest'ultimo le responsabilità di        *
+  inizializzare gli altri servizi (localStorage e userService) dell'avvenuto login      *
+  però non mi è parso così utile, quindi per ora è così                                 *
+*****************************************************************************************/
 
   protected user: User;
   protected loginFailed: boolean;
@@ -44,17 +56,31 @@ export class LoginComponent extends BaseComponent implements OnInit  {
     });
   }
 
+  logout() {
+    this.usersService.logout().subscribe(() => {
+      // pulisco localStorage
+      this.localStorageService.deleteSession();
+      this.localStorageService.deleteConversation();
+      this.localStorageService.cleanAll();
+
+      // notifico ad authservice che è avvenuto il log out
+      this.authService.setLoggedUser(null);
+      this.authService.setSessionID(null);
+      this.authService.setUserLogged(false);
+      // redirect
+      this.router.navigate(['/login']);
+    });
+  }
+
   getUserLogged(): boolean {
     return this.isUserLogged;
   }
 
   constructor(protected localStorageService: LocalStorageService,
     protected usersService: UserService,
-    protected localComponentsService: LocalComponentsService,
     protected router: Router,
     protected authService: AuthGuardService
     ) {
-      super(localStorageService, usersService, localComponentsService, router, authService);
     }
 
   ngOnInit() {

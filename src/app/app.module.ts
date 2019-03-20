@@ -8,7 +8,6 @@ import { AppComponent } from './components/app/app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserService } from './services/user.service';
 import { LocalStorageService } from './services/local/local.storage.service';
-import { LocalComponentsService } from './services/local/local.components.service';
 import { HomeComponent } from '../app/components/home/home.component';
 import { HeaderComponent } from '../app/components/header/header.component';
 import { OrderComponent } from '../app/components/order/order.component';
@@ -46,7 +45,6 @@ import { InfoReviewComponent } from './components/info-form/info-review.componen
     ProductsService,
     OrderService,
     AuthGuardService,
-    LocalComponentsService,
     LocalStorageService
   ],
   bootstrap: [AppComponent]

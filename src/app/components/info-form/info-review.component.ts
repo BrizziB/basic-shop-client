@@ -13,6 +13,12 @@ import { LocalStorageService } from '../../services/local/local.storage.service'
 })
 export class InfoReviewComponent implements OnInit {
 
+    /***************************************************************************
+  questo componente rappresenta i dati dell'utente, appena inizializzato
+  richiama i dati dell'utente da server e li mostra. non può modificarli
+
+  ****************************************************************************/
+
   constructor(
     protected userService: UserService,
     protected localStorageService: LocalStorageService,
@@ -23,7 +29,6 @@ export class InfoReviewComponent implements OnInit {
   user: User = new User;
 
   ngOnInit() {
-    console.log("daje oh");
     this.userService.getUser().subscribe(
       (resp) => {
         if (!isNullOrUndefined(resp.body)) {
